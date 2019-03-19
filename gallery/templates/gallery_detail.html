@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% load filters %}
+
+
+{% block main-navigation %}
+    {% include 'navigation.html' %}
+{% endblock main-navigation %}
+
+
+<!--Content
+  ====================================================================================================================
+  -->
+{% block ts-content %}
+
+    <!--Content
+    ====================================================================================================================
+    -->
+    <div class="ts-content" data-bg-color="#0c0c0c">
+        <!--HERO HEADER
+        ================================================================================================================
+        ================================================================================================================
+        -->
+        <header id="ts-hero" class="ts-block text-white pb-0">
+
+            <div class="container pt-2 pt-sm-5 pt-lg-0">
+                <h1 data-animate="ts-reveal">
+                    <span class="wrapper">
+                        <span>{{ album.name }}</span>
+                    </span>
+                </h1>
+                {% if album.description %}
+                    <h4>{{ album.description }}</h4>
+                {% endif %}
+            </div>
+
+        </header>
+
+        <!--MAIN CONTENT
+        ================================================================================================================
+        ================================================================================================================
+        -->
+        <main id="ts-content">
+
+            <!--Works
+            ============================================================================================================
+            -->
+            <section id="works">
+                <div class="ts-gallery row no-gutters">
+                    {% if not photos %}
+                        <div class="container pt-2 pt-sm-5 pt-lg-0 text-light">
+                            <h4>В этот альбом фотографии еще не добавлены</h4>
+                        </div>
+                    {% else %}
+                        {% for photo in photos %}
+                            <!---->
+                            <div class="col-md-4 col-lg-4">
+                                <a href="{{ photo.photo.url }}"
+                                   class="card ts-gallery__item ts-floated-description popup-image"
+                                        {% if not forloop.first %}
+                                   data-delay="{{ forloop.counter|delays:'0.05' }}s"
+                                        {% endif %}
+                                   data-animate="ts-fadeInUp">
+                                    <div class="ts-gallery__item-description">
+                                        <h5>{{ photo.description }}</h5>
+                                        <h3>{{ photo.name }}</h3>
+                                    </div>
+                                    <div class="ts-background ts-img-into-bg">
+                                        <img src="{{ photo.photo.url }}" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <!--end gallery item-->
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="py-5 text-center ts-background-repeat" data-bg-image={% static '/img/bg__pattern--dot.png' %}>
+                <div class="container py-5 my-5">
+                    <a href="/gallery/" class="btn btn-outline-light">Вернуться к выбору альбомов</a>
+                </div>
+            </section>
+
+        </main>
+        <!--end #content-->
+
+        <!--FOOTER
+        ================================================================================================================
+        ================================================================================================================
+        -->
+        {% block footer %}
+            {% include 'footer.html' %}
+        {% endblock footer %}
+    </div>
+{% endblock ts-content %}

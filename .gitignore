@@ -1,0 +1,8 @@
+/.idea/
+*.pyc
+*.swp
+*.db
+/env/
+/pyenv/
+/venv/
+/Trash/

@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="ThemeStarz">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'font-awesome/css/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static 'css/odometer-theme-default.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <title>Персональный сайт воспитателя Романовой Таньяны Николаевны</title>
+    {% endblock head %}
+</head>
+
+<body class="has-loading-screen">
+{% block button %}
+    {% include 'button.html' %}
+{% endblock button %}
+
+{% block body %}
+    <div class="ts-page-wrapper">
+        <!--Main Left Navigation
+        ====================================================================================================================
+        -->
+        {% block main-navigation %}
+            {% include 'navigation.html' %}
+        {% endblock main-navigation %}
+        <!--Content
+        ====================================================================================================================
+        -->
+        {% block ts-content %}
+            <div class="ts-content">
+                <!--HERO HEADER
+                ================================================================================================================
+                ================================================================================================================
+                -->
+                {% block ts-hero %}
+                {% endblock ts-hero %}
+                <!--MAIN CONTENT
+                ================================================================================================================
+                ================================================================================================================
+                -->
+                {% block main-content %}
+                {% endblock main-content%}
+                <!--end #content-->
+
+                <!--FOOTER
+                ================================================================================================================
+                ================================================================================================================
+                -->
+                {% block footer %}
+                {% endblock footer %}
+                <!--end #footer-->
+            </div>
+            <!--end page-->
+        {% endblock ts-content %}
+    </div>
+
+    {% block scripts %}
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'font-awesome/js/all.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+        <script src="{% static 'js/isInViewport.jquery.js' %}"></script>
+        <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'js/scrolla.jquery.min.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'js/jquery-validate.bootstrap-tooltip.min.js' %}"></script>
+        <script src="{% static 'js/odometer.min.js' %}"></script>
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+        <script src="{% static 'js/ajax.js' %}"></script>
+        <script src="{% static 'js/docview.js' %}"></script>
+    {% endblock scripts %}
+
+{% endblock body %}
+</body>
+</html>
