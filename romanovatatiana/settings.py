@@ -24,9 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2i7cv@5e*@((_pi)$c31ix@qb9ivr+ui^hc@4bee(9g6ec_8hs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    u'9200247477.myjino.ru',
+    u'romanovatatiana.ru',
+    ]
 
 # Application definition
 
@@ -125,12 +128,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-# STATIC_ROOT = os.path.join(os.path.expanduser('~'), 'domains/romanovatatiana.ru/static/')
 STATIC_URL = '/static/'
-MEDIA_URL = STATIC_URL + 'media/'
+MEDIA_URL = 'media/'
 
-#STATIC_ROOT = os.path.join(os.path.expanduser('~'), 'domains/romanovatatiana.ru/static/')
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(os.path.expanduser('~'), 'projects/romanovatatiana/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'production_static')
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
 
@@ -279,5 +281,13 @@ TEMPLATE_CONTACTS = u'contacts.html'
 TEMPLATE_NEWS_LIST = u'news__list.html'
 TEMPLATE_NEWS_DETAIL = u'news__detail.html'
 TEMPLATE_NO_PAGE = u'404.html'
+
+try:
+    LOCAL_INSTALLED_APPS = LOCAL_MIDDLEWARE = []
+    from romanovatatiana.local_settings import *
+    INSTALLED_APPS += LOCAL_INSTALLED_APPS
+    MIDDLEWARE = LOCAL_MIDDLEWARE + MIDDLEWARE
+except ImportError:
+    pass
 
 
