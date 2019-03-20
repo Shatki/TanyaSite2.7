@@ -27,6 +27,9 @@ class Photo(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return u'%s' % self.name
+
     def dir(self):
         return self.album
 
@@ -50,6 +53,9 @@ class Album(models.Model):
 
     def __str__(self):
         return self.directory
+
+    def __unicode__(self):
+        return u'%s' % self.directory
 
     def url(self):
         # return '%s/' % self.directory  # ВРЕМЕННО

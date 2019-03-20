@@ -122,10 +122,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+URL = ''
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-# STATIC_ROOT = os.path.join(os.path.expanduser('~'), 'domains/romanovatatiana.ru/static/')
 STATIC_URL = '/static/'
 MEDIA_URL = STATIC_URL + 'media/'
 

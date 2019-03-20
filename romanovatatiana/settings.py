@@ -27,8 +27,8 @@ SECRET_KEY = '2i7cv@5e*@((_pi)$c31ix@qb9ivr+ui^hc@4bee(9g6ec_8hs'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    u'9200247477.myjino.ru',
     u'romanovatatiana.ru',
+    u'9200247477.myjino.ru',
     ]
 
 # Application definition
@@ -125,11 +125,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+URL = 'romanovatatiana.ru'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
 STATIC_URL = '/static/'
-MEDIA_URL = 'media/'
+MEDIA_URL = STATIC_URL + 'media/'
 
 # STATIC_ROOT = os.path.join(os.path.expanduser('~'), 'projects/romanovatatiana/static/')
 STATIC_ROOT = os.path.join(BASE_DIR, 'production_static')

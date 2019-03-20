@@ -15,7 +15,7 @@ from pages.models import Document, Editor
 from romanovatatiana.settings import MENU_CHOICES, MENU_DEFAULT, TEMPLATE_PAGE_DEFAULT, TEMPLATE_DOCUMENTS, TEMPLATE_NO_PAGE, \
     TEMPLATE_EDITOR, TEMPLATE_CONTACTS
 from romanovatatiana.settings import DOCUMENT_PDF_MINIATURE, DOCUMENT_EXCEL_MINIATURE, DOCUMENT_POWERPOINT_MINIATURE, \
-    DOCUMENT_WORD_MINIATURE, DOCUMENT_UNKNOWN_MINIATURE, NO_PHOTO
+    DOCUMENT_WORD_MINIATURE, DOCUMENT_UNKNOWN_MINIATURE, NO_PHOTO, URL
 from romanovatatiana.settings import PPTX, PDF, PPT, XLS, XLSX, DOC, DOCX, UNKNOWN
 
 from romanovatatiana.settings import DOCS, EDITOR
@@ -115,6 +115,7 @@ def documents(args, url):
     args['XLSX'] = XLSX
     args['DOC'] = DOC
     args['DOCX'] = DOCX
+    args['URL'] = URL
     template = TEMPLATE_DOCUMENTS
     try:
         docs = Document.objects.filter(page__url=url, allowed=True).order_by('-added')

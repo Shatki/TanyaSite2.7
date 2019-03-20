@@ -12,9 +12,9 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Document(models.Model):
     class Meta:
-        verbose_name = 'документ'
-        verbose_name_plural = 'документы'
-        db_table = 'documents'
+        verbose_name = u'документ'
+        verbose_name_plural = u'документы'
+        db_table = u'documents'
 
     # комментатор
     title = models.CharField(max_length=100, verbose_name=u'Наименование документа',
@@ -31,10 +31,13 @@ class Document(models.Model):
     page = models.ForeignKey(Menu, verbose_name=u'размещение документа',
                              on_delete=models.CASCADE, blank=False, null=False)
     allowed = models.BooleanField(verbose_name=u'разрешение на публикацию', default=False)
-    type = models.CharField(max_length=7, verbose_name='тип документа', choices=DOCUMENT_TYPES, default=PDF)
+    type = models.CharField(max_length=7, verbose_name=u'тип документа', choices=DOCUMENT_TYPES, default=PDF)
 
     def __str__(self):
-        return '%s %s' % (self.added, self.author)
+        return u'%s %s' % (self.added, self.author)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.added, self.author)
 
     def save(self, *args, **kwargs):
         # print(self.doc.url[-4:])
@@ -61,9 +64,9 @@ class Document(models.Model):
 
 class Editor(models.Model):
     class Meta:
-        verbose_name = 'текстовая страница'
-        verbose_name_plural = 'текстовые страницы'
-        db_table = 'editors'
+        verbose_name = u'текстовая страница'
+        verbose_name_plural = u'текстовые страницы'
+        db_table = u'editors'
 
     title = models.CharField(max_length=100, verbose_name=u'Наименование текста',
                              unique=True, blank=False, null=False)
@@ -81,4 +84,7 @@ class Editor(models.Model):
     header = models.FileField(upload_to=HEADER_PHOTOS_DIR, verbose_name=u'фотография в шапке страницы', null=True)
 
     def __str__(self):
-        return '%s %s' % (self.title, self.description)
+        return u'%s %s' % (self.title, self.description)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.title, self.description)

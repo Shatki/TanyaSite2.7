@@ -9,9 +9,9 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class News(models.Model):
     class Meta:
-        verbose_name = 'новость'
-        verbose_name_plural = 'новости'
-        db_table = 'news'
+        verbose_name = u'новость'
+        verbose_name_plural = u'новости'
+        db_table = u'news'
 
     title = models.CharField(max_length=50, verbose_name=u'заголовок')
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
@@ -31,18 +31,21 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+    def __unicode__(self):
+        return u'%s' % self.title
+
     def url(self):
-        return '%s/%s/' % (NEWS, self.id)
+        return u'%s/%s/' % (NEWS, self.id)
 
     def date(self):
-        return '{:0>2}/{:0>2}/{:0>2}'.format(str(self.added.day), str(self.added.month), str(self.added.year))
+        return u'{:0>2}/{:0>2}/{:0>2}'.format(str(self.added.day), str(self.added.month), str(self.added.year))
 
 
 class Comment(models.Model):
     class Meta:
-        verbose_name = 'комментарий'
-        verbose_name_plural = 'комментарии'
-        db_table = 'comments'
+        verbose_name = u'комментарий'
+        verbose_name_plural = u'комментарии'
+        db_table = u'comments'
 
     # комментатор
     author = models.CharField(max_length=50, verbose_name=u'имя комментатора')
@@ -54,11 +57,13 @@ class Comment(models.Model):
     reply = models.ForeignKey('self', verbose_name=u'ответ на комментарий', on_delete=models.CASCADE,
                               blank=True, null=True)
     message = RichTextField(verbose_name=u'текст комментария', blank=False, null=False)
-    photo = models.ImageField(upload_to=PROFILE_PHOTOS_DIR, verbose_name=u'фотография профиля',
-                              name='photo', blank=True)
+    photo = models.ImageField(upload_to=PROFILE_PHOTOS_DIR, verbose_name=u'фотография профиля', blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.added, self.author)
+        return u'%s %s' % (self.added, self.author)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.added, self.author)
 
 
 def get_news():

@@ -37,6 +37,9 @@ class Content(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return u'%s' % self.name
+
     def get_type(self):
         return self.type
 
@@ -59,6 +62,9 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return u'%s' % self.name
+
     def full(self):
         return u"%s-%s, %s, %sч., %s" % (self.begin_date, self.finish_date, self.name, self.duration, self.place)
 
@@ -77,3 +83,6 @@ class Award(models.Model):
 
     def __str__(self):
         return self.name
+
+    def __unicode__(self):
+        return u'%s' % self.name
