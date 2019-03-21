@@ -62,21 +62,26 @@
     </div>
 
     {% block scripts %}
+        <!-- jQuery основной плагин -->
         <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <!-- Font-Awesome основной плагин -->
         <script src="{% static 'font-awesome/js/all.min.js' %}"></script>
-        <script src="{% static 'js/popper.min.js' %}"></script>
+        <!-- Bootstrap 4 основной плагин -->
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- управлением событием загрузки изображений на странице -->
         <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
         <script src="{% static 'js/isInViewport.jquery.js' %}"></script>
         <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+        <!-- постепенное появление изображений -->
         <script src="{% static 'js/scrolla.jquery.min.js' %}"></script>
+        <!-- Валидация форм -->
         <script src="{% static 'js/jquery.validate.min.js' %}"></script>
         <script src="{% static 'js/jquery-validate.bootstrap-tooltip.min.js' %}"></script>
+        <!-- Бегущие цифры на главной странице -->
         <script src="{% static 'js/odometer.min.js' %}"></script>
-        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <!-- Настройка плагинов сайта -->
+        <script src="{% static 'js/jquery.bootstrap.modal.js' %}"></script>
         <script src="{% static 'js/custom.js' %}"></script>
-        <script src="{% static 'js/ajax.js' %}"></script>
-        <script src="{% static 'js/docview.js' %}"></script>
     {% endblock scripts %}
 
 {% endblock body %}

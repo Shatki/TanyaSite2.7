@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // jQuery
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var resizeId;
+let resizeId;
 
 $(function() {
     "use strict";
@@ -226,6 +226,13 @@ $(function() {
                     let $form = $button.closest("form");
                     if(response === true){
                         $form.trigger("reset");
+                        let div = '<div class="container">Ваше сообщение успешно отправлено</div>';
+                        $.createModal({
+                            title:'Обратная связь',
+                            message: div,
+                            closeButton:true,
+                            scrollable:false
+                        });
                         $button.addClass("done").removeClass('processing').
                         prop("disabled", true);
                         return false;
@@ -246,7 +253,6 @@ $(function() {
 
 
     // News
-
     $("#form-news-reply-submit").on("click", function(e){
         let valid = true;
         $('input.form-control.form-reply').each(function (i, elem) {
@@ -342,6 +348,23 @@ $(function() {
         resizeId = setTimeout(doneResizing, 250);
     });
 
+
+    /*
+* Here is how you use it
+*/
+
+    $('.doc-view').on('click',function(){
+        var pdf_link = $(this).attr('href');
+        var iframe = '<div class="iframe-container"><iframe src="'+pdf_link+'"></iframe></div>';
+        $.createModal({
+            title:'Предпросмотр документа',
+            message: iframe,
+            closeButton:true,
+            scrollable:false
+        });
+        return false;
+    });
+
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,7 +378,6 @@ function doneResizing(){
 }
 
 // Smooth Scroll
-
 $(".ts-scroll").on("click", function(event) {
     if (
         location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '')
@@ -389,28 +411,6 @@ function getScrollBarWidth () {
         widthWithScroll = $('<div>').css({width: '100%'}).appendTo($outer).outerWidth();
     $outer.remove();
     return 100 - widthWithScroll;
-}
-
-function simpleMap(latitude, longitude, markerImage, mapStyle, mapElement, markerDrag){
-    if (!markerDrag){
-        markerDrag = false;
-    }
-    var mapCenter = new google.maps.LatLng(latitude,longitude);
-    var mapOptions = {
-        zoom: 13,
-        center: mapCenter,
-        disableDefaultUI: true,
-        scrollwheel: false,
-        styles: mapStyle
-    };
-    var element = document.getElementById(mapElement);
-    var map = new google.maps.Map(element, mapOptions);
-    var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(latitude,longitude),
-        map: map,
-        icon: markerImage,
-        draggable: markerDrag
-    });
 }
 
 function initOwl(){

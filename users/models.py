@@ -69,10 +69,10 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['username', ]
 
     def __unicode__(self):
-        return u'%d: %s' % (self.id, self.username)
+        return u'%s' % self.username
 
     def __str__(self):
-        return self.username
+        return u'%s' % self.username
 
     def get_photo(self):
         return self.photo
