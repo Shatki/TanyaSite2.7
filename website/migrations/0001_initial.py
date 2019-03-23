@@ -14,22 +14,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Feedback',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='\u0438\u043c\u044f')),
-                ('email', models.CharField(max_length=50, verbose_name='email')),
-                ('subject', models.CharField(max_length=100, verbose_name='\u0442\u0435\u043c\u0430 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f')),
-                ('message', models.CharField(max_length=400, verbose_name='\u0442\u0435\u043a\u0441\u0442 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f')),
-                ('date', models.DateTimeField(auto_now_add=True, verbose_name='\u0432\u0440\u0435\u043c\u044f \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0438')),
-            ],
-            options={
-                'db_table': 'feedbacks',
-                'verbose_name': '\u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435 \u0441 \u0444\u043e\u0440\u043c\u044b \u043e\u0431\u0440\u0430\u0442\u043d\u043e\u0439 \u0441\u0432\u044f\u0437\u0438',
-                'verbose_name_plural': '\u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f \u0441 \u0444\u043e\u0440\u043c\u044b \u043e\u0431\u0440\u0430\u0442\u043d\u043e\u0439 \u0441\u0432\u044f\u0437\u0438',
-            },
-        ),
-        migrations.CreateModel(
             name='Menu',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

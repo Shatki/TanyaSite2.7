@@ -17,6 +17,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+FILES_DIR = os.path.dirname(os.path.join(os.path.expanduser('~'), 'files'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -28,6 +30,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     u'romanovatatiana.ru',
+    u'https://romanovatatiana.ru',
+    u'www.romanovatatiana.ru'
     u'9200247477.myjino.ru',
     ]
 
@@ -129,12 +133,17 @@ URL = 'romanovatatiana.ru'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+STATIC_ROOT = os.path.join(FILES_DIR, 'files', 'static')
 STATIC_URL = '/static/'
-MEDIA_URL = STATIC_URL + 'media/'
 
-# STATIC_ROOT = os.path.join(os.path.expanduser('~'), 'projects/romanovatatiana/static/')
-STATIC_ROOT = os.path.join(BASE_DIR, 'production_static')
-MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
+MEDIA_ROOT = os.path.join(FILES_DIR, 'files', 'media')
+MEDIA_URL = '/media/'
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 26214400
+FILE_UPLOAD_DIRECTORY_PERMISSIONS = None
+FILE_UPLOAD_PERMISSIONS = None
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 
 STATIC_IMAGE_DIR = 'img/'

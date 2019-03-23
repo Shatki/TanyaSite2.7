@@ -37,6 +37,9 @@ class News(models.Model):
     def url(self):
         return u'%s/%s/' % (NEWS, self.id)
 
+    def absolute_url(self):
+        return u'/%s/%s/' % (NEWS, self.id)
+
     def date(self):
         return u'{:0>2}/{:0>2}/{:0>2}'.format(str(self.added.day), str(self.added.month), str(self.added.year))
 

@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from experience.views import awards
+from users.views import feedback
 import website.views as pages
 from gallery.views import gallery_list, gallery_detail
 from news.views import news_list, news_detail, comment
@@ -32,7 +33,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^about/awards/', awards),
     url(r'^about/', pages.about),
-    url(r'^contacts/feedback/', pages.feedback),
+    url(r'^contacts/feedback/', feedback),
     url(r'^contacts/', pages.contacts),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^gallery/(?P<directory>\w+)/$', gallery_detail),

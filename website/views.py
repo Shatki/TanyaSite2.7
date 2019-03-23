@@ -7,7 +7,7 @@ from django.contrib import auth
 from django.views.decorators.csrf import csrf_protect
 
 from users.models import User
-from .models import Menu, Feedback
+from .models import Menu
 from experience.models import Course
 from news.models import Comment, get_news
 from gallery.models import Photo
@@ -65,7 +65,7 @@ def about(request):
     for news in get_news()[:3]:
         collect = dict(
             id=news.id,
-            url=news.url,
+            url=news.absolute_url,
             fix=news.fix,
             title=news.title,
             added=news.added,
@@ -181,15 +181,3 @@ def contacts(request):
     args['menus'] = menus()
 
     return render_to_response(TEMPLATE_CONTACTS, args)
-
-
-@csrf_protect
-def feedback(request):
-    message = Feedback.objects.create(
-        name=request.POST['name'],
-        email=request.POST['email'],
-        subject=request.POST['subject'],
-        message=request.POST['message'],
-    )
-    message.save()
-    return JsonResponse(True, safe=False)

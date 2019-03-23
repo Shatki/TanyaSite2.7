@@ -126,13 +126,10 @@ URL = ''
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
 STATIC_URL = '/static/'
-MEDIA_URL = STATIC_URL + 'media/'
-
-#STATIC_ROOT = os.path.join(os.path.expanduser('~'), 'domains/romanovatatiana.ru/static/')
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
+MEDIA_URL = '/media/'
 
 STATIC_IMAGE_DIR = 'img/'
 CONTENT_PICS_DIR = 'content/'
@@ -154,7 +151,7 @@ STATICFILES_FINDERS = (
 )
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR,  'files', 'static'),
 )
 
 # Application definition

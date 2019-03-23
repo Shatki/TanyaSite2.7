@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import Menu, Section, Feedback
+from .models import Menu, Section
 
 
 # Register your models here.
@@ -15,18 +15,6 @@ class MenuAdmin(admin.ModelAdmin):
 
     search_fields = ('name',)
     ordering = ('menu',)
-
-@admin.register(Feedback)
-class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('name',
-                    'email',
-                    'subject',
-                    'date',
-                    'message',
-                    )
-
-    search_fields = ('name',)
-    ordering = ('date',)
 
 
 

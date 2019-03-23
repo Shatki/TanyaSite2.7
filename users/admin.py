@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import forms
 
-from .models import User
+from .models import User, Feedback
 
 
 class UserCreationForm(forms.UserCreationForm):
@@ -112,4 +112,16 @@ class UserAdmin(UserAdmin):
         'user_permissions',
     )
 
+
 # Register your models here.
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('name',
+                    'date',
+                    'email',
+                    'subject',
+                    'message',
+                    )
+
+    search_fields = ('name',)
+    ordering = ('date',)

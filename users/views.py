@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
+
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_protect
-
-from .models import User
+from .models import User, Feedback
 from romanovatatiana.settings import STATIC_URL, PROFILE_PHOTO_DEFAULT_NAME, PROFILE_PHOTOS_DIR
 
 
@@ -20,3 +21,16 @@ def get_photo(request, username):
 
     # print(os.path.join(PROFILE_PHOTOS_DIR, photo))
     return redirect(os.path.join(STATIC_URL, PROFILE_PHOTOS_DIR + photo))
+
+
+@csrf_protect
+def feedback(request):
+    message = Feedback.objects.create(
+        name=request.POST['name'],
+        email=request.POST['email'],
+        subject=request.POST['subject'],
+        message=request.POST['message'],
+    )
+    message.save()
+    return JsonResponse(True, safe=False)
+
