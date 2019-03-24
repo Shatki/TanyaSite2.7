@@ -16,14 +16,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from sys import path
-
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from experience.views import awards
 from users.views import feedback
-import website.views as pages
+from pages.views import page_dispatcher
+from website.views import about, contacts
 from gallery.views import gallery_list, gallery_detail
 from news.views import news_list, news_detail, comment
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -32,9 +32,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^about/awards/', awards),
-    url(r'^about/', pages.about),
+    url(r'^about/', about),
     url(r'^contacts/feedback/', feedback),
-    url(r'^contacts/', pages.contacts),
+    url(r'^contacts/', contacts),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^gallery/(?P<directory>\w+)/$', gallery_detail),
     url(r'^gallery/', gallery_list),
@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^news/(?P<news_id>\d+)/', news_detail),
     url(r'^news/', news_list),
 
-    url('^(?P<menu>\w+)/(?P<url>\w+)/', pages.page_dispatcher),
-    url(r'^$', pages.about),
+    url('^(?P<menu>\w+)/(?P<url>\w+)/', page_dispatcher),
+    url(r'^$', about),
     # path('users/<username>/photo/', users.get_photo),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()

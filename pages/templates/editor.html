@@ -15,41 +15,16 @@
         ================================================================================================================
         ================================================================================================================
         -->
-
-        <header id="ts-hero" class="ts-block ts-has-overlay text-white">
-
-            <div class="container pt-2 pt-sm-5 pt-lg-0">
-                <h1 data-animate="ts-reveal">
-                    <span class="wrapper col-md-8 offset-md-1">
-                        <span>{{ page.name }}</span>
-                    </span>
-                </h1>
-                <h2 data-animate="ts-reveal">
-                    <span class="wrapper col-md-8 offset-md-1">
-                        <span data-ts-delay=".2s">{{ page.title }}</span>
-                    </span>
-                </h2>
-            </div>
-
-            <div class="ts-background" data-bg-parallax="scroll" data-bg-parallax-speed="3">
-                <div class="ts-background-image ts-background-repeat ts-img-into-bg ts-parallax-element">
-                    <img src="{{ page.header }}" alt="">
-                </div>
-            </div>
-
-        </header>
+        {% block header %}
+            {% include 'header.html' %}
+        {% endblock header %}
 
         <!--MAIN CONTENT
         ================================================================================================================
         ================================================================================================================
         -->
         <main id="ts-content">
-
-            <!--Works
-            ============================================================================================================
-            -->
-
-            <!--Description
+            <!-- Content
             ============================================================================================================
             -->
             <section class="ts-block pb-0">

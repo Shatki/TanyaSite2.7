@@ -285,6 +285,7 @@ DOCUMENT_UNKNOWN_MINIATURE = STATIC_IMAGE_DIR + 'unknown.png'
 # Виды шаблонов страниц
 TEMPLATE_PAGE_DEFAULT = u'about.html'
 TEMPLATE_DOCUMENTS = u'documents.html'
+TEMPLATE_PAGE_HEADER = u'header.html'
 TEMPLATE_AWARDS = u'awards.html'
 TEMPLATE_EDITOR = u'editor.html'
 TEMPLATE_CONTACTS = u'contacts.html'

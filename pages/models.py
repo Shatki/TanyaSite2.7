@@ -17,7 +17,7 @@ class Document(models.Model):
         db_table = u'documents'
 
     # комментатор
-    title = models.CharField(max_length=100, verbose_name=u'Наименование документа',
+    title = models.CharField(max_length=200, verbose_name=u'Наименование документа',
                              unique=True, blank=False, null=False)
     description = models.CharField(max_length=200, verbose_name=u'описание документа',
                                    unique=True, blank=True, null=True)
