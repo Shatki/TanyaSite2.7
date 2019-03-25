@@ -3,16 +3,14 @@
 from django.contrib import auth
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_protect
-
 from .models import Album, Photo
 from romanovatatiana.settings import NO_PHOTO, MENU_DEFAULT
 from website.views import menus
 from users.models import User
-
-# Create your views here.
 from django.template.context_processors import csrf
 
 
+# Create your views here.
 @csrf_protect
 def gallery_list(request):
     args = {}
@@ -29,7 +27,7 @@ def gallery_list(request):
     for _object in Album.objects.all():
         try:
             _photo = Photo.objects.get(album_id=_object.id, label=True)
-        except:
+        except Photo.DoesNotExist:
             _photo = None
         else:
             _photo = _photo.photo.url
@@ -50,7 +48,6 @@ def gallery_list(request):
 
 @csrf_protect
 def gallery_detail(request, directory):
-    print(directory)
     args = {}
     args.update(csrf(request))
     if request.user.is_authenticated:
@@ -67,7 +64,9 @@ def gallery_detail(request, directory):
         # print(photos)
         args[u'album'] = album
         args[u'photos'] = photos
-    except:
-        args[u'result'] = u'DB Query error: gallery'
+    except Album.DoesNotExist:
+        args[u'result'] = u'DB Query error: gallery album does not exist'
+    except Photo.DoesNotExist:
+        args[u'result'] = u'DB Query error: gallery photos does not exist'
 
     return render_to_response(u'gallery_detail.html', args)

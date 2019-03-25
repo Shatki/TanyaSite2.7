@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.core.mail import send_mail
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from romanovatatiana.validators import login, email
 from romanovatatiana.settings import PROFILE_PHOTOS_DIR, PROFILE_PHOTO_DEFAULT_NAME
 
@@ -37,7 +37,7 @@ class UserManager(BaseUserManager):
 
 
 # Create your models here.
-class User(AbstractUser):
+class User(AbstractUser, PermissionsMixin):
     class Meta:
         verbose_name = u'пользователь'
         verbose_name_plural = u'пользователи'
