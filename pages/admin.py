@@ -9,7 +9,6 @@ from .models import Document, Editor
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('title',
                     'page',
-                    'description',
                     'author',
                     'allowed',
                     'added',
@@ -24,7 +23,6 @@ class DocumentAdmin(admin.ModelAdmin):
 class EditorAdmin(admin.ModelAdmin):
     list_display = ('title',
                     'page',
-                    'description',
                     'author',
                     'allowed',
                     'added',

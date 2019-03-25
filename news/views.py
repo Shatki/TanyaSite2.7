@@ -18,20 +18,18 @@ from django.template.context_processors import csrf
 @csrf_protect
 def comment(request, news_id):
     response = True
-    try:
-        news = Comment.objects.create(
+
+    news = Comment.objects.create(
             author=request.POST[u'form-news-reply-name'],
             email=request.POST[u'form-news-reply-email'],
             news_id=news_id,
             message=u'<p>%s</p>' % request.POST[u'form-news-reply-message'],
         )
-        try:
-            news.reply_id = request.POST[u'form-news-reply-comment']
-        except:
-            news.reply_id = None
-        news.save()
-    except:
-        response = False
+    try:
+        news.reply_id = request.POST[u'form-news-reply-comment']
+    except news.DoesNotExist:
+        news.reply_id = None
+    news.save()
 
     return JsonResponse(response, safe=False)
 
@@ -41,17 +39,18 @@ def news_detail(request, news_id):
     args = {}
     args.update(csrf(request))
     if request.user.is_authenticated:
-        args[u'username'] = auth.get_user(request).username
-        args[u'profile'] = auth.get_user(request).photo
+        # args[u'profile'] = auth.get_user(request).photo
+        args[u'reply_name'] = auth.get_user(request).get_short_name
+        args[u'reply_email'] = auth.get_user(request).email
+        args[u'photo'] = User.objects.get(is_superuser=True).photo
 
-    args[u'photo'] = User.objects.get(is_superuser=True).photo
     args[u'menus'] = menus()
     args[u'menu_default'] = MENU_DEFAULT
     args[u'result'] = True
     news = []
     try:
         news = News.objects.get(id=news_id)
-    except:
+    except News.DoesNotExist:
         args[u'result'] = False
     args[u'news'] = news
     _comments = Comment.objects.filter(news_id=news_id, allowed=True)

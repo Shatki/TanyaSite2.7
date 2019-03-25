@@ -210,7 +210,8 @@ $(function() {
         });
     }
 
-    $(".ts-form-email [type='submit']").each(function(){
+    // animation of sending
+    $(".ts-form [type='submit']").each(function(){
         var text = $(this).text();
         $(this).html("").append("<span>"+ text +"</span>").prepend("<div class='status'><i class='fas fa-circle-notch fa-spin spinner'></i></div>");
     });
@@ -247,47 +248,45 @@ $(function() {
         });
     });
 
-    $("form:not(.ts-form-email)").each(function(){
-        $(this).validate();
-    });
-
-
+    //$("form:not(.ts-form-email)").each(function(){
+    //    $(this).validate();
+    //});
+    
     // News
-    $("#form-news-reply-submit").on("click", function(e){
-        let valid = true;
-        $('input.form-control.form-reply').each(function (i, elem) {
-            let $this = $(elem);
-            if ($this.hasClass("error")) {
-                valid = false;
-                return false;
-            }
-            if (!$this.hasClass("valid")) {
-                valid = false;
-                return false;
-            }
-        });
-        if(valid){
-            let $button = $(this);
-            let $form = $button.closest("form");
-            // let path = $button.closest("form").attr("data-path");
-            //alert($form.find('.error').attr('name'));
-            $.ajax({
-                url: 'comment/',
-                method: 'POST',
-                data: $form.serialize(),
-                cache: false,
-                success: function (data) {
-                    if (data === true) {
-                        // Чистка формы
-                        //$form.get(0).reset();
+    // Отправка комментариев
+    $(".ts-form-comment").validate({
+            submitHandler: function(form) {
+                let $form = $(form);
+                let $button = $(form).find('.btn');
+                var path = $form.attr("data-path");
+                $button.addClass("processing");
+                $.post(path, $form.serialize(),  function(response) {
+                    //let $form = $button.closest("form");
+                    if(response === true){
+                        $form.trigger("reset");
+                        let div = '<div class="container">Ваш комментарий отправлен. Он будет виден после модерации.</div>';
+                        $.createModal({
+                            title:'Обсуждение новостей',
+                            message: div,
+                            closeButton:true,
+                            scrollable:false
+                        });
+                        $button.addClass("done").removeClass('processing').
+                        prop("disabled", true);
                         return false;
-                    } else {
-                        alert('Ошибка отправки комментария!');
+                    }else{
+                        let div = '<div class="container">При отправке возникла ошибка.</div>';
+                        $.createModal({
+                            title:'Обсуждение новостей',
+                            message: div,
+                            closeButton:true,
+                            scrollable:false
+                        });
                     }
-                }
-            });
-            // Стандартно завершаем после удачной отправки
-        }
+                });
+                // Стандартно завершаем после удачной отправки
+                return false;
+            }
     });
 
     $(".link-reply").on("click", function(e){
@@ -302,7 +301,6 @@ $(function() {
         $('#form-news-reply-comment').attr("value", comment_id);
         $('#leave-reply-header-text').hide();
         $('#form-news-cancel-reply-to').show();
-
         return false;
     });
 

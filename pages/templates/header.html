@@ -7,9 +7,14 @@
                         <span>{{ page.title }}</span>
                     </span>
             </h1>
-
-        </div>
-
+            {% if page.title != page.description and page.description %}
+                <h2 data-animate="ts-reveal">
+                    <span class="wrapper col-md-8 offset-md-1">
+                        <span data-ts-delay=".2s">{{ page.description }}</span>
+                    </span>
+                </h2>
+                </div>
+            {% endif %}
         <div class="ts-background" data-bg-parallax="scroll" data-bg-parallax-speed="3">
             <div class="ts-background-image ts-background-repeat ts-img-into-bg ts-parallax-element">
                 <img src="{{ page.header }}" alt="">

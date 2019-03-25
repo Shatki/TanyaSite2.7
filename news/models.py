@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from django.db import models
-from romanovatatiana.settings import NEWS_PHOTOS_DIR, PROFILE_PHOTOS_DIR, NEWS
+from romanovatatiana.settings import NEWS_PHOTOS_DIR, PROFILE_PHOTOS_DIR, NEWS, NO_PHOTO
 from users.models import User
 from ckeditor.fields import RichTextField
 
@@ -67,6 +67,13 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return u'%s %s' % (self.added, self.author)
+
+    def save(self, *args, **kwargs):
+        try:
+            self.photo = User.objects.get(email=self.email).photo
+        except User.DoesNotExist:
+            self.photo = None
+        super(Comment, self).save(*args, **kwargs)
 
 
 def get_news():

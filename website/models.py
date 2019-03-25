@@ -13,12 +13,15 @@ class Menu(models.Model):
         db_table = u'menus'
 
     name = models.CharField(max_length=50, verbose_name=u'наименование страницы меню(отображается в навигации)')
-    title = models.CharField(max_length=50, verbose_name=u'полное наименование страницы меню(отображается в заголовках)')
+    title = models.CharField(max_length=100, verbose_name=u'Основное наименование заголовка страницы меню')
+    description = models.CharField(max_length=200, default=None, null=True, blank=True,
+                                   verbose_name=u'дополнительное название заголовка страницы меню')
     menu = models.CharField(verbose_name=u"корневое меню", default=MENU_DEFAULT,
                             max_length=20, blank=False, choices=MENU_CHOICES)
     url = models.CharField(max_length=200, verbose_name=u"гиперссылка на страницу")
 
-    page = models.CharField(verbose_name=u'тип страницы', default=NULL_PAGE, choices=PAGE_TYPES, max_length=20, blank=False)
+    page = models.CharField(verbose_name=u'тип страницы', default=NULL_PAGE, choices=PAGE_TYPES, max_length=20,
+                            blank=False)
 
     def __str__(self):
         return self.name
@@ -51,4 +54,3 @@ class Section(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
-

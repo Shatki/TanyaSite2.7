@@ -17,9 +17,9 @@ class Document(models.Model):
         db_table = u'documents'
 
     # комментатор
-    title = models.CharField(max_length=200, verbose_name=u'Наименование документа',
+    title = models.CharField(max_length=100, verbose_name=u'Наименование документа',
                              unique=True, blank=False, null=False)
-    description = models.CharField(max_length=200, verbose_name=u'описание документа',
+    description = models.CharField(max_length=200, verbose_name=u'Наименование отражаемое на сайте',
                                    unique=True, blank=True, null=True)
     added = models.DateTimeField(verbose_name=u'время добавления', auto_now_add=True)
     author = models.ForeignKey(User, verbose_name=u'Кто добавил/автор документа', on_delete=models.CASCADE)
@@ -68,10 +68,10 @@ class Editor(models.Model):
         verbose_name_plural = u'текстовые страницы'
         db_table = u'editors'
 
-    title = models.CharField(max_length=100, verbose_name=u'Наименование текста',
+    title = models.CharField(max_length=100, verbose_name=u'Основное наименование редактируемой страницы',
                              unique=True, blank=False, null=False)
-    description = models.CharField(max_length=200, verbose_name=u'описание содержания',
-                                   unique=True, blank=True, null=True)
+    description = models.CharField(max_length=200, verbose_name=u'Дополнение к названию страницы',
+                                   blank=False, null=False)
     added = models.DateTimeField(verbose_name=u'время добавления', auto_now_add=True)
     author = models.ForeignKey(User, verbose_name=u'Кто добавил/автор текста', on_delete=models.CASCADE, null=False)
 

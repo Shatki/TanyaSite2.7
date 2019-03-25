@@ -3,21 +3,20 @@
 {% block leave-reply %}
     <section id="leave-reply" class="py-5">
         <header id="leave-reply-header-text"><h3 class="no-border">Оставить комментарий</h3></header>
-        <form role="form" id="form-news-reply" method="post"
-              class="clearfix ts-form-comment" data-path="/news/{{ news.id }}/comment/">
+        <form id="form-news-reply" method="post" class="clearfix ts-form ts-form-comment" data-path="comment/">
             {% csrf_token %}
             <input type="hidden" id="form-news-reply-comment" name="form-news-reply-comment" value="">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form-news-reply-name">Ваше имя<em>*</em></label>
-                        <input type="text" class="form-reply form-control" id="form-news-reply-name" name="form-news-reply-name" required>
+                        <input type="text" class="form-reply form-control" id="form-news-reply-name" name="form-news-reply-name" value="{{ reply_name }}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="form-news-reply-email">Ваш e-mail<em>*</em></label>
-                        <input type="email" class="form-reply form-control" id="form-news-reply-email" name="form-news-reply-email" required>
+                        <input type="email" class="form-reply form-control" id="form-news-reply-email" name="form-news-reply-email" value="{{ reply_email }}" required>
                     </div>
                 </div>
             </div>

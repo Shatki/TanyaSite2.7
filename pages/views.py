@@ -49,8 +49,9 @@ def editors(args, url):
     try:
         editor = Editor.objects.get(page__url=url, allowed=True)
         args['page'].text = editor.text
-        args['page'].title = editor.title
         args['page'].header = editor.header.url
+        args['page'].title = editor.title
+        args['page'].description = editor.description
     except Editor.DoesNotExist:
         return args, TEMPLATE_NO_PAGE
     return args, TEMPLATE_EDITOR
