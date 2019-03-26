@@ -86,7 +86,9 @@ def get_news():
             fix = _news
         else:
             news_sort.append(_news)
-    news_sort.append(fix)
+
+    if fix is not None:
+        news_sort.append(fix)
 
     news_sort.reverse()
     return news_sort

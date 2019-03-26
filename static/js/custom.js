@@ -348,8 +348,8 @@ $(function() {
 
 
     /*
-* Here is how you use it
-*/
+    * Here is how you use it
+    */
 
     $('.doc-view').on('click',function(){
         var pdf_link = $(this).attr('href');

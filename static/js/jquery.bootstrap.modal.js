@@ -9,8 +9,8 @@
         closeButton:true,
         scrollable:false};
     var b=a.extend({}, defaults,b);
-    var c=(b.scrollable===true)?'style="max-width: 800px; max-height: 480px;overflow-y: auto;"':"";
-    html='<div class="modal fade" id="pdfModal">';
+    var c=(b.scrollable===true)?'style="overflow-y: auto;"':"";
+    html='<div class="modal fade" id="document-view-modal">';
     html+='<div class="modal-dialog">';
     html+='<div class="modal-content">';
     html+='<div class="modal-header">';
@@ -24,7 +24,7 @@
     html+="</div>";html+="</div>";
     html+="</div>";
     a("body").prepend(html);
-    a("#pdfModal").modal().on("hidden.bs.modal",function(){
+    a("#document-view-modal").modal().on("hidden.bs.modal",function(){
         a(this).remove()
     })}
 })(jQuery);

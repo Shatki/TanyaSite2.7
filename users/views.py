@@ -32,5 +32,8 @@ def feedback(request):
         message=request.POST['message'],
     )
     message.save()
+    # Отправка письм
+    user = User.objects.get(is_superuser=True)
+    user.send_email(subject=message.subject, message=message.message, from_email=message.email)
     return JsonResponse(True, safe=False)
 

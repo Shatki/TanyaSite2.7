@@ -37,7 +37,7 @@ class UserManager(BaseUserManager):
 
 
 # Create your models here.
-class User(AbstractUser, PermissionsMixin):
+class User(AbstractUser):
     class Meta:
         verbose_name = u'пользователь'
         verbose_name_plural = u'пользователи'
@@ -83,7 +83,7 @@ class User(AbstractUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
+    def send_email(self, subject, message, from_email=None, **kwargs):
         """
         Отправляет электронное письмо этому пользователю.
         """

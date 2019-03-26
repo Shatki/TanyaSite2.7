@@ -55,18 +55,21 @@ def about(request):
     args['courses'] = Course.objects.all().order_by('begin_date')
 
     # Данные по новостям
-    for news in get_news()[:3]:
-        collect = dict(
-            id=news.id,
-            url=news.absolute_url,
-            fix=news.fix,
-            title=news.title,
-            added=news.added,
-            text=news.text,
-            photo=news.photo,
-            comments=0,
-        )
-        args['news_list'].append(collect)
+    for news in get_news()[-3:]:
+        try:
+            collect = dict(
+                id=news.id,
+                url=news.absolute_url,
+                fix=news.fix,
+                title=news.title,
+                added=news.added,
+                text=news.text,
+                photo=news.photo,
+                comments=0,
+            )
+            args['news_list'].append(collect)
+        except:
+            pass
     comments = Comment.objects.filter(allowed=True)
     for news in args['news_list']:
         for comment in comments:
@@ -76,14 +79,17 @@ def about(request):
     # Данные галлереи
     photos = []
     for _photo in Photo.objects.all().order_by('-added')[:6]:  # Нужно чтоб выдавал последние
-        photo = dict(
-            id=_photo.id,
-            name=_photo.name,
-            url=_photo.url(),
-            photo=_photo,
-            album=_photo.album.name,
-        )
-        photos.append(photo)
+        try:
+            photo = dict(
+                id=_photo.id,
+                name=_photo.name,
+                url=_photo.url(),
+                photo=_photo,
+                album=_photo.album.name,
+            )
+            photos.append(photo)
+        except:
+            pass
     args['photos'] = photos
     args['NO_PHOTO'] = NO_PHOTO
 

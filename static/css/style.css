@@ -3182,14 +3182,11 @@ F. 3D document flip
 /***********************************************************************************************************************
 G. document preview modal
 ***********************************************************************************************************************/
+
 .iframe-container {
     padding-bottom: 60%;
-    padding-top: 30px;
-
-    border:none;
-    position: fixed;
-    width:50%;
-    overflow: hidden;
+    width: 800px;
+    padding-top: 30px; height: 0; overflow: hidden;
 }
 
 .iframe-container iframe,

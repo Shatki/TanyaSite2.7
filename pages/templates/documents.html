@@ -54,8 +54,8 @@
                                                 <img src="{% static DOCUMENT_UNKNOWN_MINIATURE %}" class="card-img-top img-fluid">
                                             {% endif %}
                                             <div class="card-block">
-                                                <h4 class="card-title">{{ document.title }}</h4>
-                                                <p class="card-text">{{ document.description }}</p>
+                                                <h4 class="card-title"><b>{{ document.title|upper }}</b></h4>
+                                                <p class="card-text">{{ document.description|lower|capfirst }}</p>
                                                 <p class="card-text"><small class="text-muted">Добавлен: {{ document.added|timesince }} назад</small></p>
                                             </div>
                                         </div>
@@ -67,7 +67,7 @@
                                                 Действия над фалом {{ document.type|upper }}
                                             </div>
                                             <div class="card-block">
-                                                <h4 class="card-title">{{ document.title }}</h4>
+                                                <h4 class="card-title"><b>{{ document.title|upper }}</b></h4>
                                                 <p class="card-text">Нажмите 'Просмотр', чтобы ознакомиться с документом или 'Скачать', для загрузки файла на ваш компьютер</p>
                                                 {% if document.type == PDF %}
                                                     <a href="{{ document.doc.url }}" class="btn btn-primary btn-card doc-view">Просмотр</a>
