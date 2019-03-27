@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import romanovatatiana.private_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,19 +22,6 @@ FILES_DIR = os.path.dirname(os.path.join(os.path.expanduser('~'), 'files'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2i7cv@5e*@((_pi)$c31ix@qb9ivr+ui^hc@4bee(9g6ec_8hs'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = [
-    u'romanovatatiana.ru',
-    u'https://romanovatatiana.ru',
-    u'www.romanovatatiana.ru'
-    u'9200247477.myjino.ru',
-    ]
 
 # Application definition
 
@@ -128,8 +116,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-URL = 'romanovatatiana.ru'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

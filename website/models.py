@@ -64,11 +64,12 @@ class MailSet(models.Model):
         db_table = u'mailsets'
 
     name = models.CharField(max_length=50, verbose_name=u'название настроек')
-    default = models.BooleanField(verbose_name=u'использовать эти настройки для передачи почты', default=False)
+    default = models.BooleanField(verbose_name=u'основные', default=False)
 
     email_host = models.CharField(max_length=50, verbose_name=u'хост', default='smtp.gmail.com')
     email_host_port = models.IntegerField(verbose_name=u'порт', default=587)
     email_use_tls = models.BooleanField(verbose_name=u'использовать защищеное соединение TLS', default=True)
+    email_use_ssl = models.BooleanField(verbose_name=u'использовать шифрование SSL', default=False)
     email_host_user = models.CharField(max_length=50, verbose_name=u'транспортная почта')
     email_host_password = models.CharField(max_length=50, verbose_name=u'транспортный пароль')
 
@@ -80,9 +81,12 @@ class MailSet(models.Model):
 
     def setup(self):
         backend = EmailBackend(host=self.email_host, port=self.email_host_port, username=self.email_host_user,
-                               password=self.email_host_password, use_tls=self.email_use_tls)
+                               password=self.email_host_password, use_tls=self.email_use_tls,
+                               fail_silently=False, use_ssl=self.email_use_ssl)
         return backend
 
     def save(self, *args, **kwargs):
         MailSet.objects.all().update(default=False)
+        if self.email_use_ssl==True and self.email_use_tls:
+            self.email_use_ssl = False
         super(MailSet, self).save(*args, **kwargs)

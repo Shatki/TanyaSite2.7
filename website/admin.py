@@ -26,6 +26,7 @@ class MailSetAdmin(admin.ModelAdmin):
                     'email_host_user',
                     'email_host_password',
                     'email_use_tls',
+                    'email_use_ssl',
                     )
 
     ordering = ('name',)

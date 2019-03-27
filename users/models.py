@@ -84,16 +84,17 @@ class User(AbstractUser):
     def get_short_name(self):
         return self.first_name
 
-    def send_email(self, subject, message, from_email=None, **kwargs):
+    def send_email(self, name=u'Anonymus', from_email=None, subject=u'None', message=u'None', **kwargs):
         """
         Отправляет электронное письмо этому пользователю.
         """
-        try:
-            MailSet.objects.get(default=True).setup()
-            EmailMessage(subject, message, from_email, [self.email], **kwargs)
-        except IOError:
-            return False
-        return True
+        # Настраиваем шлюз
+        email_subject = u'Пользователь %s<%s> оставил сообщение на сате на тему: %s' % (name, from_email, subject)
+        html = u'<p><h3>%s</h3></p>' % message
+        email = EmailMessage(email_subject, html, from_email, [self.email], **kwargs)
+        email.content_subtype = "html"  # Main content is now text/html
+        email.send()
+        return
 
     def has_perm(self, perm, obj=None):
         return True
