@@ -3,6 +3,7 @@
 from django.db import models
 from romanovatatiana.settings import MENU_CHOICES, MENU_DEFAULT
 from romanovatatiana.settings import PAGE_TYPES, NULL_PAGE
+from django.core.mail.backends.smtp import EmailBackend
 
 
 # Create your models here.
@@ -54,3 +55,34 @@ class Section(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
+
+
+class MailSet(models.Model):
+    class Meta:
+        verbose_name = u"Шлюз отправки почты"
+        verbose_name_plural = u'Шлюзы отправки почты'
+        db_table = u'mailsets'
+
+    name = models.CharField(max_length=50, verbose_name=u'название настроек')
+    default = models.BooleanField(verbose_name=u'использовать эти настройки для передачи почты', default=False)
+
+    email_host = models.CharField(max_length=50, verbose_name=u'хост', default='smtp.gmail.com')
+    email_host_port = models.IntegerField(verbose_name=u'порт', default=587)
+    email_use_tls = models.BooleanField(verbose_name=u'использовать защищеное соединение TLS', default=True)
+    email_host_user = models.CharField(max_length=50, verbose_name=u'транспортная почта')
+    email_host_password = models.CharField(max_length=50, verbose_name=u'транспортный пароль')
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
+    def setup(self):
+        backend = EmailBackend(host=self.email_host, port=self.email_host_port, username=self.email_host_user,
+                               password=self.email_host_password, use_tls=self.email_use_tls)
+        return backend
+
+    def save(self, *args, **kwargs):
+        MailSet.objects.all().update(default=False)
+        super(MailSet, self).save(*args, **kwargs)

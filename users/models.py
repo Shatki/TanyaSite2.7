@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from romanovatatiana.validators import login, email
 from romanovatatiana.settings import PROFILE_PHOTOS_DIR, PROFILE_PHOTO_DEFAULT_NAME
+from website.models import MailSet
 
 
 # Класс менеджера должен переопределить методы create_user() и create_superuser().
@@ -87,7 +88,12 @@ class User(AbstractUser):
         """
         Отправляет электронное письмо этому пользователю.
         """
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+        try:
+            MailSet.objects.get(default=True).setup()
+            EmailMessage(subject, message, from_email, [self.email], **kwargs)
+        except IOError:
+            return False
+        return True
 
     def has_perm(self, perm, obj=None):
         return True
